@@ -1,0 +1,2 @@
+# TibNorm
+Normalising Tibetan Text
