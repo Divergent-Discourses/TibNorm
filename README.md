@@ -4,6 +4,7 @@ Normalising Tibetan Text
 <!-- TODOs -->
 <!-- 1. explain how to use it -->
 <!-- 2. explain columns of each table -->
+<!-- 3. a token is missing in a line of the abbreviation list. -->
 
 ## How to use
 ```
