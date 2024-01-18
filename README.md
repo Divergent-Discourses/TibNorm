@@ -6,6 +6,8 @@ Normalising Tibetan Text
 <!-- 2. explain columns of each table -->
 
 ## How to use
+1. Change your path in _config.ini_
+
 ```
 python ...
 ```
