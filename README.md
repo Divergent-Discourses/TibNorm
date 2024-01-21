@@ -28,7 +28,9 @@ python ...
 - Combinations of more than two signs that are to be put together in every case: e.g., ང and _tsheg_ (་) &rarr; ང་
 #### Table5
 - Combinations of more than two signs that are not allowed to come together, but with an(/some) exception(s): e.g., _tsheg_ (་) and _shad_ (།) ; ་། &rarr; །, but when it is preceded by ང, it is not the case.
-
+### The order of norminalization.
+The replacement is done in the following order:
+- ...
 ### Things to pay attention to, when adding a new line to a table.
 - If a tab is to added as a value of a table, you should type \\\t. The tab itself is \t and the additional backslash (\) is the escape character.
 - If a line break is to added as a value of a table, you should type \\\n.
