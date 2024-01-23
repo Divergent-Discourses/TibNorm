@@ -15,8 +15,8 @@ transcription	normalisation
 )	)
 「	'
 」	'
-『	\\"
-』	\\"
+『	\"
+』	\"
 ﹁	'
 ﹂	'
 [	[
@@ -26,4 +26,3 @@ transcription	normalisation
 ་།	།
 ཀ།	ཀ
 ག།	ག
-\\n།	\\n

@@ -21,12 +21,15 @@ python ...
 - This table also contains [abbreviations](http://www.rkts.org/abb/list.php).
 - This table also contains combinations of more than two signs that are not allowed to come together: e.g., ག། &rarr; ག
 #### Table2
-- Reduce repeated multiple signs to one sign: e.g., ་་་་་་་་་་ &rarr; ་ (Multiple _tsheg_ is reduced to one _tsheg_)
+- Simple replacement, but with regular expressions: e.g., \\n། &rarr; \\n.
+- This replacement is done by _re.sub_ function, but it is slower than the simple replacement function (_replace_), which is used to normalize characters in table1 Therefore, whenever it is possible to normalize a character without using a regular expression, it is advisable to include it in table1.
 #### Table3
-- Completely delete specific signs in the corpus: e.g., དོན་ བྱེད་ &rarr; དོན་བྱེད་
+- Reduce repeated multiple signs to one sign: e.g., ་་་་་་་་་་ &rarr; ་ (Multiple _tsheg_ is reduced to one _tsheg_)
 #### Table4
-- Combinations of more than two signs that are to be put together in every case: e.g., ང and _tsheg_ (་) &rarr; ང་
+- Completely delete specific signs in the corpus: e.g., དོན་ བྱེད་ &rarr; དོན་བྱེད་
 #### Table5
+- Combinations of more than two signs that are to be put together in every case: e.g., ང and _tsheg_ (་) &rarr; ང་
+#### Table6
 - Combinations of more than two signs that are not allowed to come together, but with an(/some) exception(s): e.g., _tsheg_ (་) and _shad_ (།) ; ་། &rarr; །, but when it is preceded by ང, it is not the case.
 ### The order of norminalization.
 The replacement is done in the following order:
