@@ -10,7 +10,6 @@ def load_tables(config):
     for file in files:
         file_name = os.path.basename(file).split('.')[0]
         tables[file_name] = pd.read_csv(file, sep='\t', escapechar='\\', index_col=None)
-        # tables[file_name] = pd.read_csv(file, sep='\t', index_col=None)
     return tables
 
 def load_texts(config):
@@ -26,8 +25,9 @@ def load_texts(config):
             texts[doc] += open(file).read()
     return texts
 
-def norm_table1(texts, table):
+def norm_table1(texts, tables):
     text_norm = {}
+    table = tables['table1'].set_index('transcription')['normalisation'].to_dict()
     for doc, text in texts.items():
         for key, value in table.items():
             text = text.replace(key, value)
@@ -35,8 +35,9 @@ def norm_table1(texts, table):
 
     return text_norm
 
-def norm_table2(texts, table):
+def norm_table2(texts, tables):
     text_norm = {}
+    table = tables['table2'].set_index('transcription')['normalisation'].to_dict()
     for doc, text in texts.items():
         for key, value in table.items():
             text = re.sub(key, value, text)
@@ -44,14 +45,33 @@ def norm_table2(texts, table):
 
     return text_norm
 
+def norm_table3(texts, tables):
+    text_norm = {}
+    table = {}
+    for index, row in tables['table3'].iterrows():
+        table[row['transcription']] = (row['normalisation'], row['exception'].split(','))
+    for doc, text in texts.items():
+        for key, value in table.items():
+            for i in range(len(text)):
+                if text[i] == key:
+                    # print(text[i-1], text[i], text[i+1])
+                    exceptions = value[1]
+                    for reg in exceptions:
+                        print(bool(re.match('a', reg))) # One of the outputs must be True!
+                        # print(bool(re.match(text[i-1], reg)))
+                    # flag = [re.match(text[i-1], reg) for reg in exceptions]
+                    # print(text[i-1], text[i], text[i+1])
+                    # if text[i-1] or text[i+1] in
+
+    return None
+
 def normalisation(texts, tables):
+
     # normalisation by table1
-    table1 = tables['table1'].set_index('transcription')['normalisation'].to_dict()
-    text_norm1 = norm_table1(texts, table1)
+    text_norm1 = norm_table1(texts, tables)
 
     # normalisation by table2
-    table2 = tables['table2'].set_index('transcription')['normalisation'].to_dict()
-    text_norm = norm_table2(text_norm1, table2)
+    text_norm = norm_table2(text_norm1, tables)
 
     return text_norm
 

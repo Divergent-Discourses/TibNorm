@@ -1,11 +1,10 @@
 import os
-import re
 from configparser import ConfigParser
 from module import load_texts, load_tables, normalisation, export_text
 
 # TODO: create other normalisation functions in module.py
 # TODO: Think in which order (table1, table2, ...) the replacement is to be executed.
-# table1 (་།) -> table6 (ང་)
+# The order of the process: table1 (་།) -> table4 (ང་)
 
 def main():
     config = ConfigParser()
