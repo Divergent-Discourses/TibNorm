@@ -49,21 +49,21 @@ def norm_table3(texts, tables):
     text_norm = {}
     table = {}
     for index, row in tables['table3'].iterrows():
-        table[row['transcription']] = (row['normalisation'], row['exception'].split(','))
+        table[row['transcription']] = (row['normalisation'], row['exception'])
     for doc, text in texts.items():
+        text_norm[doc] = str()
         for key, value in table.items():
+            exception = re.compile(value[1])
             for i in range(len(text)):
                 if text[i] == key:
-                    # print(text[i-1], text[i], text[i+1])
-                    exceptions = value[1]
-                    for reg in exceptions:
-                        print(bool(re.match('a', reg))) # One of the outputs must be True!
-                        # print(bool(re.match(text[i-1], reg)))
-                    # flag = [re.match(text[i-1], reg) for reg in exceptions]
-                    # print(text[i-1], text[i], text[i+1])
-                    # if text[i-1] or text[i+1] in
+                    if bool(exception.search(text[i-1])) or bool(exception.search(text[i+1])):
+                        text_norm[doc] += text[i]
+                    else:
+                        text_norm[doc] += value[0]
+                else:
+                    text_norm[doc] += text[i]
 
-    return None
+    return text_norm
 
 def normalisation(texts, tables):
 
@@ -71,7 +71,10 @@ def normalisation(texts, tables):
     text_norm1 = norm_table1(texts, tables)
 
     # normalisation by table2
-    text_norm = norm_table2(text_norm1, tables)
+    text_norm2 = norm_table2(text_norm1, tables)
+
+    # normalisation by table3
+    text_norm = norm_table3(text_norm2, tables)
 
     return text_norm
 
