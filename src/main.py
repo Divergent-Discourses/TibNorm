@@ -2,9 +2,7 @@ import os
 from configparser import ConfigParser
 from module import load_texts, load_tables, normalisation, export_text
 
-# TODO: rewrite norm_table3, so that more than one character like ་། are also detected.
-# TODO: Think in which order (table1, table2, ...) the replacement is to be executed.
-# The order of the process: table1 (་།) -> table4 (ང་)
+# TODO: texts, the order of the texts 0001->0002 or p.1->p.2
 
 def main():
     config = ConfigParser()

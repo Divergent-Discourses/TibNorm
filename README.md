@@ -24,9 +24,7 @@ python src/main.py
 - Replacement using regular expressions: e.g., \\n། &rarr; \\n; ་་་་་་་་་་ &rarr; ་ (Multiple _tsheg_ is reduced to one _tsheg_)
 - This replacement is done by _re.sub_ function, but it is slower than the simple replacement function (_replace_), which is used to normalise characters in table1 Therefore, whenever it is possible to normalise a character without using a regular expression, it is advisable to include it in table1.
 #### Table3
-- Repalcement with some exceptions: e.g., whitespace ( ) &rarr; _tsheg_ (་), but spaces before and after numbers, alphabetic characters and ༄ should remain.
-#### Table4
-- Characters or combinations of the characters, which must be be put together: e.g., ང and tsheg (་) &rarr; ང་.
+- Repalcement with some exceptions: e.g., whitespace ( ) &rarr; _tsheg_ (་), but spaces before and after numbers, alphabetic characters and ༄ should remain; ་། &rarr; །, but not when ་། is preceded by ང.
 
 ### The order of norminalisation.
 The replacement is done in the following order:
