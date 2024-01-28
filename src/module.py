@@ -76,7 +76,6 @@ def normalisation(texts, tables):
 
     # normalisation by table2
     text_norm2 = norm_table2(text_norm1, tables)
-    # text_norm = norm_table2(text_norm1, tables)
 
     # normalisation by table3
     text_norm = norm_table3(text_norm2, tables)
