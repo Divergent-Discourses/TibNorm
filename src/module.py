@@ -56,15 +56,16 @@ def norm_table3(texts, tables):
             exception = re.compile(value[1])
             for i in range(len(text_list)):
                 if len(key) > 1:
-                    pos_end = i + len(key) # when len(key) = 1, pos_end+1 does not refer to what I intended, but something next to what I want to refer to.
+                    pos_end = i + len(key)
+                    if text_list[i:pos_end] == list(key):
+                        if bool(exception.search(text_list[i-1])) or bool(exception.search(text_list[pos_end+1])):
+                            pass
+                        else:
+                            text_list[i:pos_end] = [value[0]] + [''] * (pos_end - i - 1)
                 else:
-                    pos_end = i
-                if text_list[i:pos_end] == list(key):
-                    if bool(exception.search(text_list[i-1])) or bool(exception.search(text_list[pos_end+1])):
-                        pass
-                    else:
-                        if len(key) > 1:
-                            text_list[i:pos_end] = [value[0]] + [''] * (pos_end-i-1)
+                    if text_list[i] == key:
+                        if bool(exception.search(text_list[i-1])) or bool(exception.search(text_list[i+1])):
+                            pass
                         else:
                             text_list[i] = value[0]
 
