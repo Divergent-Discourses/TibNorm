@@ -57,17 +57,13 @@ def norm_table3(texts, tables):
             for i in range(len(text_list)):
                 if len(key) > 1:
                     pos_end = i + len(key)
-                    if text_list[i:pos_end] == list(key):
-                        if bool(exception.search(text_list[i-1])) or bool(exception.search(text_list[pos_end+1])):
-                            pass
-                        else:
-                            text_list[i:pos_end] = [value[0]] + [''] * (pos_end - i - 1)
+                    flag = (text_list[i:pos_end] == list(key)) and (not (bool(exception.search(text_list[i-1])) or bool(exception.search(text_list[pos_end+1]))))
+                    if flag:
+                        text_list[i:pos_end] = [value[0]] + [''] * (pos_end - i - 1)
                 else:
-                    if text_list[i] == key:
-                        if bool(exception.search(text_list[i-1])) or bool(exception.search(text_list[i+1])):
-                            pass
-                        else:
-                            text_list[i] = value[0]
+                    flag = (text_list[i] == key) and (not (bool(exception.search(text_list[i-1])) or bool(exception.search(text_list[i+1]))))
+                    if flag:
+                        text_list[i] = value[0]
 
         text_norm[doc] = ''.join(text_list)
 
