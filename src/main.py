@@ -2,7 +2,7 @@ import os
 from configparser import ConfigParser
 from module import load_texts, load_tables, normalisation, export_text
 
-# TODO: texts, the order of the texts 0001->0002 or p.1->p.2
+# TODO: paragraph identification, try out with 1761186 where tabs are missing.
 
 def main():
     config = ConfigParser()

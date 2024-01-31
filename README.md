@@ -39,7 +39,7 @@ python src/main.py
     2. _normalisation_: character(s) with which the character(s) in _transcription_ are to be replaced.
     3. _exception_: If the character(s) in _transcription_ appears before or after the character(s) in _exception_, the replacement is canceled.
 
-### Things to pay attention to, when adding a new line to a table.
+### Things to pay attention to, when adding a new entry to a table.
 - Some regular expressions should be escaped by adding a backslash before them, e.g., \\\n (\ + \n)
 - It is assumed that the order of normalisation does not affect the final result, nevertheless for safety you place a new normalisation in the bottom of the table.
-- When adding a new line to a table, it's recommended to verify the success of the replacement and ensure that it doesn't impact other replacements, and to visualise the differences before and after adding the line for confirmation.
+- When adding a new entry to a table, it's recommended to verify the success of the replacement and ensure that it doesn't impact other replacements, and to visualise the differences before and after adding the line for confirmation using a [diff-tool](https://www.site24x7.com/tools/diff-checker.html).
