@@ -43,3 +43,4 @@ python src/main.py
 - Some regular expressions should be escaped by adding a backslash before them, e.g., \\\n (\ + \n)
 - It is assumed that the order of normalisation does not affect the final result, nevertheless for safety you place a new normalisation in the bottom of the table.
 - When adding a new entry to a table, it's recommended to verify the success of the replacement and ensure that it doesn't impact other replacements, and to visualise the differences before and after adding the line for confirmation using a [diff-tool](https://www.site24x7.com/tools/diff-checker.html).
+- A character with a vowel, e.g., ཏེ (length=2), or a ligature, e.g., བཀྲམས (length=5), are computationally regarded as multiple characters. Thus, for example, if you refer to ཏ as a consonant, you should use regular expression, so that ཏ with any vowel is also included.
