@@ -49,21 +49,23 @@ def norm_table3(texts, tables):
     text_norm = {}
     table = {}
     for index, row in tables['table3'].iterrows():
-        table[row['transcription']] = (row['normalisation'], row['exception'])
+        table[row['transcription']] = (row['normalisation'], row['exception'], row['exc_len'])
     for doc, text in texts.items():
         text_list = list(text)
         for key, value in table.items():
             exception = re.compile(value[1])
+            exc_len = value[2]
             for i in range(len(text_list)):
+                pos_end = i + len(key)
+                str_range = ''.join(text_list[i - exc_len:pos_end + exc_len])
                 if len(key) > 1:
-                    pos_end = i + len(key)
-                    flag = (text_list[i:pos_end] == list(key)) and (not (bool(exception.search(text_list[i-1])) or bool(exception.search(text_list[pos_end+1]))))
-                    if flag:
-                        text_list[i:pos_end] = [value[0]] + [''] * (pos_end - i - 1)
+                    if text_list[i:pos_end] == list(key):
+                        if not bool(exception.search(str_range)):
+                            text_list[i:pos_end] = [value[0]] + [''] * (pos_end - i - 1)
                 else:
-                    flag = (text_list[i] == key) and (not (bool(exception.search(text_list[i-1])) or bool(exception.search(text_list[i+1]))))
-                    if flag:
-                        text_list[i] = value[0]
+                    if text_list[i] == key:
+                        if not bool(exception.search(str_range)):
+                            text_list[i] = value[0]
 
         text_norm[doc] = ''.join(text_list)
 
