@@ -57,7 +57,9 @@ def norm_table3(texts, tables):
             exc_len = value[2]
             for i in range(len(text_list)):
                 pos_end = i + len(key)
-                str_range = ''.join(text_list[i - exc_len:pos_end + exc_len])
+                start = 0 if i - exc_len <= 0 else i - exc_len
+                end = len(text_list) -1 if pos_end + exc_len > len(text_list) else pos_end + exc_len
+                str_range = ''.join(text_list[start:end])
                 if len(key) > 1:
                     if text_list[i:pos_end] == list(key):
                         if not bool(exception.search(str_range)):
