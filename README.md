@@ -41,6 +41,7 @@ python src/main.py
     4. _exc_len_: This parameter signifies the maximum length of characters in _exception_. For instance, characters in [A-Za-z0-9\u4e00-\u9fff༄] represent individually a single character, thus having a maximum length of 1 (This is equivalent to [A-Za-z0-9\u4e00-\u9fff༄]{1}, though the Python code itself does not explicitly specify the length). Conversely, characters in (?:ང|ངི|ངུ|ངེ|ངོ) have lengths: ང is treated as a single character, while the others, combined with a vowel, are considered as two characters. Thus, the maximal length in this case is 2.
 
 ### Things to pay attention to, when adding a new entry to a table.
+- Consider whether the entry you want to add is part of other words. If it is, you will need to use regular expressions to define exceptions.
 - Some regular expressions should be escaped by adding a backslash before them, e.g., \\\n (\ + \n)
 - It is assumed that the order of normalisation does not affect the final result, nevertheless for safety you place a new normalisation in the bottom of the table.
 - When adding a new entry to a table, it's recommended to verify the success of the replacement and ensure that it doesn't impact other replacements, and to visualise the differences before and after adding the line for confirmation using a [diff-tool](https://www.site24x7.com/tools/diff-checker.html).
