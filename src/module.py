@@ -6,10 +6,16 @@ import re
 def load_tables(config):
     tables = {}
     pattern = os.path.join(config['paths']['table_path'], '*.tsv')
+    flag = int(config['parameters']['flag'])
     files = [file for file in glob.glob(pattern, recursive=True) if os.path.isfile(file)]
     for file in files:
         file_name = os.path.basename(file).split('.')[0]
-        tables[file_name] = pd.read_csv(file, sep='\t', escapechar='\\', index_col=None)
+        if file_name == 'abbreviations':
+            df = pd.read_csv(file, sep='\t', escapechar='\\', index_col=None)
+            tables[file_name] = df[df['flag'] == flag]
+        else:
+            tables[file_name] = pd.read_csv(file, sep='\t', escapechar='\\', index_col=None)
+
     return tables
 
 def load_texts(config):
@@ -24,6 +30,16 @@ def load_texts(config):
             file_name = os.path.basename(file).split('.')[0]
             texts[doc] += open(file).read()
     return texts
+
+def norm_abbreviation(texts, tables):
+    text_norm = {}
+    table = tables['abbreviations'].set_index('transcription')['normalisation'].to_dict()
+    for doc, text in texts.items():
+        for key, value in table.items():
+            text = text.replace(key, value)
+        text_norm[doc] = text
+
+    return text_norm
 
 def norm_table1(texts, tables):
     text_norm = {}
@@ -75,8 +91,11 @@ def norm_table3(texts, tables):
 
 def normalisation(texts, tables):
 
+    # normalisation by abbreviations
+    text_abbreviation = norm_abbreviation(texts, tables)
+
     # normalisation by table1
-    text_norm1 = norm_table1(texts, tables)
+    text_norm1 = norm_table1(text_abbreviation, tables)
 
     # normalisation by table2
     text_norm2 = norm_table2(text_norm1, tables)

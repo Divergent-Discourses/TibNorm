@@ -2,8 +2,6 @@ import os
 from configparser import ConfigParser
 from module import load_texts, load_tables, normalisation, export_text
 
-# TODO: ང་ normalisation does not work in norm_table3. -> It seems to work -> check again
-# TODO: Exceptions of ཀ། and ག།
 # TODO: paragraph identification, try out with 1761186 where tabs are missing.
 
 def main():

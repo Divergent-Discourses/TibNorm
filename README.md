@@ -2,6 +2,7 @@
 Normalising Tibetan Text
 
 <!-- TODOs -->
+<!-- 1. describe the abbreviation table -->
 
 ## How to use
 1. Change your path in _src/config.ini_
