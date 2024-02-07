@@ -20,10 +20,15 @@ python src/main.py
 ### Description of tables
 - The tables below contain signs or combinations to be processed (e.g., replaced with other signs, reduced to one sign, etc.)
 - The columns of the tables are separated by a tab.
+#### Abbreviations
+- Simple replacement of [abbreviations](http://www.rkts.org/abb/list.php), just as in table1.
+- Columns:
+  1. _transcription_: an abbreviated form.
+  2. _normalisation_: a full-form.
+  3. _flag_: 0 means that the replacement is cancelled, while 1 means that it is valid. You can modify this parameter in _src/config.ini_.
 #### Table1
-- Simple replacement: e.g., ༠ &rarr; 0.
-- This table also contains [abbreviations](http://www.rkts.org/abb/list.php).
-- This table also contains combinations of more than two signs that are not allowed to come together: e.g., ག། &rarr; ག
+- Simple replacement except for abbreviations: e.g., ༠ &rarr; 0.
+- This table contains combinations of more than two characters that are not allowed to come together: e.g., ག། &rarr; ག
 - Columns:
   1. _transcription_: character(s) to be replaced with others.
   2. _normalisation_: character(s) with which the character(s) in _transcription_ are to be replaced.
