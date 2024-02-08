@@ -24,13 +24,11 @@ def load_texts(config):
     documents = os.listdir(path)
     for doc in documents:
         texts[doc] = {}
-        # texts[doc] = str()
         pattern = os.path.join(path , doc, '**', '*.txt')
         files = [file for file in glob.glob(pattern, recursive=True) if os.path.isfile(file)]
         for file in files:
             file_name = os.path.basename(file).split('.')[0]
             texts[doc][file_name] = open(file).read()
-        #     texts[doc] += open(file).read()
     return texts
 
 def norm_abbreviation(texts, tables):
@@ -38,7 +36,6 @@ def norm_abbreviation(texts, tables):
     table = tables['abbreviations'].set_index('transcription')['normalisation'].to_dict()
     for doc in texts.keys():
         text_norm[doc] = {}
-    # for doc, text in texts.items():
         for file_name, text in texts[doc].items():
             for key, value in table.items():
                 text = text.replace(key, value)
