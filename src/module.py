@@ -11,7 +11,8 @@ def load_tables(config):
     for file in files:
         file_name = os.path.basename(file).split('.')[0]
         df = pd.read_csv(file, sep='\t', escapechar='\\', index_col=None)
-        if file_name == 'abbreviations':
+        flag_tables = ['abbreviations', 'table3']
+        if file_name in flag_tables:
             tables[file_name] = df[df['flag'] == flag]
         else:
             tables[file_name] = df

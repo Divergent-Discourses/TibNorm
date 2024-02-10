@@ -44,6 +44,7 @@ python src/main.py
     2. _normalisation_: character(s) with which the character(s) in _transcription_ are to be replaced.
     3. _exception_: If the character(s) in _transcription_ appears before or after the character(s) in _exception_, the replacement is canceled.
     4. _exc_len_: This parameter signifies the maximum length of characters in _exception_. For instance, characters in [A-Za-z0-9\u4e00-\u9fff༄] represent individually a single character, thus having a maximum length of 1 (This is equivalent to [A-Za-z0-9\u4e00-\u9fff༄]{1}, though the Python code itself does not explicitly specify the length). Conversely, characters in (?:ང|ངི|ངུ|ངེ|ངོ) have lengths: ང is treated as a single character, while the others, combined with a vowel, are considered as two characters. Thus, the maximal length in this case is 2.
+    5. _flag_: 0 means that the replacement is cancelled, while 1 means that it is valid. You can modify this parameter in _src/config.ini_.
 
 ### Things to pay attention to, when adding a new entry to a table.
 - Consider whether the entry you want to add is part of other words. If it is, you will need to use regular expressions to define exceptions.
