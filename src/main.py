@@ -3,7 +3,6 @@ from configparser import ConfigParser
 from module import load_texts, load_tables, normalisation, export_text
 
 # TODO: paragraph identification, try out with 1761186 where tabs are missing.
-# TODO: check Ta and Da are successfully replaced.
 
 def main():
     config = ConfigParser()
