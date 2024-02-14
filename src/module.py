@@ -8,11 +8,12 @@ def load_tables(config):
     pattern = os.path.join(config['paths']['table_path'], '*.tsv')
     flag = int(config['parameters']['flag'])
     files = [file for file in glob.glob(pattern, recursive=True) if os.path.isfile(file)]
+    flag_tables = ['abbreviations', 'table3']
     for file in files:
         file_name = os.path.basename(file).split('.')[0]
         df = pd.read_csv(file, sep='\t', escapechar='\\', index_col=None)
-        flag_tables = ['abbreviations', 'table3']
         if file_name in flag_tables:
+            df['flag'] = df['flag'].apply(pd.to_numeric, errors='coerce').astype('Int64')
             tables[file_name] = df[df['flag'] == flag]
         else:
             tables[file_name] = df
@@ -68,31 +69,71 @@ def norm_table2(texts, tables):
 
     return text_norm
 
+# def norm_table3(texts, tables):
+#     text_norm = {}
+#     table = {}
+#     for index, row in tables['table3'].iterrows():
+#         table[row['transcription']] = (row['normalisation'], row['exception'], row['exc_len'])
+#     for doc in texts.keys():
+#         text_norm[doc] = {}
+#         for file_name, text in texts[doc].items():
+#             text_list = list(text)
+#             for key, value in table.items():
+#                 exception = re.compile(value[1])
+#                 exc_len = value[2]
+#                 for i in range(len(text_list)):
+#                     pos_end = i + len(key)
+#                     start = 0 if i - exc_len <= 0 else i - exc_len
+#                     end = len(text_list) -1 if pos_end + exc_len > len(text_list) else pos_end + exc_len
+#                     str_range = ''.join(text_list[start:end])
+#                     if len(key) > 1:
+#                         if text_list[i:pos_end] == list(key):
+#                             if not bool(exception.search(str_range)):
+#                                 text_list[i:pos_end] = [value[0]] + [''] * (pos_end - i - 1)
+#                     else:
+#                         if text_list[i] == key:
+#                             if not bool(exception.search(str_range)):
+#                                 text_list[i] = value[0]
+#
+#             text_norm[doc][file_name] = ''.join(text_list)
+#
+#     return text_norm
+
 def norm_table3(texts, tables):
     text_norm = {}
     table = {}
     for index, row in tables['table3'].iterrows():
-        table[row['transcription']] = (row['normalisation'], row['exception'], row['exc_len'])
+        table[row['transcription']] = {'norm': row['normalisation'], 'exc': row['exception'], 'exc_len': row['exc_len'], 'scope': row['scope']}
     for doc in texts.keys():
         text_norm[doc] = {}
         for file_name, text in texts[doc].items():
             text_list = list(text)
             for key, value in table.items():
-                exception = re.compile(value[1])
-                exc_len = value[2]
+                exception = re.compile(value['exc'])
+                exc_len = value['exc_len']
+                scope = value['scope']
                 for i in range(len(text_list)):
                     pos_end = i + len(key)
                     start = 0 if i - exc_len <= 0 else i - exc_len
                     end = len(text_list) -1 if pos_end + exc_len > len(text_list) else pos_end + exc_len
-                    str_range = ''.join(text_list[start:end])
+                    if scope == 'left':
+                        str_range = ''.join(text_list[start:i])
+                    elif scope == 'right':
+                        str_range = ''.join(text_list[i+1:end])
+                    elif scope == 'both':
+                        str_range = ''.join(text_list[start:end])
+                    else:
+                        print('The entry of scope e in table3 is not proper.')
+                    if i - exc_len <= 0 or pos_end + exc_len > len(text_list):
+                        str_range = ''
                     if len(key) > 1:
                         if text_list[i:pos_end] == list(key):
                             if not bool(exception.search(str_range)):
-                                text_list[i:pos_end] = [value[0]] + [''] * (pos_end - i - 1)
+                                text_list[i:pos_end] = [value['norm']] + [''] * (pos_end - i - 1)
                     else:
                         if text_list[i] == key:
                             if not bool(exception.search(str_range)):
-                                text_list[i] = value[0]
+                                text_list[i] = value['norm']
 
             text_norm[doc][file_name] = ''.join(text_list)
 

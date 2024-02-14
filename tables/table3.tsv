@@ -1,5 +1,9 @@
-transcription	normalisation	exception	exc_len	flag
- 	་	[A-Za-z0-9\\u4e00-\\u9fff༄]	1	0
-་།	།	(?:ང|ངི|ངུ|ངེ|ངོ)	2	1
-ཌ་	གས་	(?:ཊ་ཀ་ཤོ་བྷོ|ཊ་རན་རྩ་ནད|ཊ་སྡེ|པཊ་ཊི|ཌ་མ་རུ)	11	1
-ཊ་	གས་	(?:ཊ་ཀ་ཤོ་བྷོ|ཊ་རན་རྩ་ནད|ཊ་སྡེ|པཊ་ཊི|ཌ་མ་རུ)	11	1
+transcription	normalisation	exception	exc_len	scope	flag
+ 	་	[A-Za-z0-9\\u4e00-\\u9fff༄]	1	both	0
+་།	།	(?:ང|ངི|ངུ|ངེ|ངོ)	2	left	1
+ཌ་	གས་	(?:ཌ་མ་རུ)	6	both	0
+ཊ་	གས་	(?:ཊ་ཀ་ཤོ་བྷོ|ཊ་རན་རྩ་ནད|ཊ་སྡེ|པཊ་ཊི)	11	both	0
+ཌ་	གས་	[་\\t\\n\\s]	1	left	1
+ཊ་	གས་	[་\\t\\n\\s]	1	left	1
+ཌ།	གས།	[་\\t\\n\\s]	1	left	1
+ཊ།	གས།	[་\\t\\n\\s]	1	left	1
