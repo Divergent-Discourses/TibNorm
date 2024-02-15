@@ -79,9 +79,7 @@ def norm_table3(texts, tables):
         for file_name, text in texts[doc].items():
             text_list = list(text)
             for key, value in table.items():
-                exception = re.compile(value['exc'])
-                exc_len = value['exc_len']
-                scope = value['scope']
+                exception, exc_len, scope = re.compile(value['exc']), value['exc_len'], value['scope']
                 for i in range(len(text_list)):
                     pos_end = i + len(key)
                     start = 0 if i - exc_len <= 0 else i - exc_len
