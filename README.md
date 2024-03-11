@@ -19,7 +19,7 @@
         the project’s Resources for Kanjur and Tanjur Studies. In TibNorm, the user can manually change the 
         flag in the abbreviations table to exclude any abbreviation that they don’t want to expand.
         
-        Tibnorm was developed for the Divergent Discourses project by YUki Kyogoku of Leipzig University.
+        Tibnorm was developed for the Divergent Discourses project by Yuki Kyogoku of Leipzig University.
 
 <!-- TODOs -->
 ## How to use
