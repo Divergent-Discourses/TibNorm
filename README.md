@@ -1,6 +1,8 @@
 # TibNorm
 
-        TibNorm is a utility for producing normalised versions of Tibetan texts to make them easier for contemporary users to search and read, in line with current Tibetan writing conventions. As part of the normalisation process, TibNorm:
+        TibNorm is a utility for producing normalised versions of Tibetan texts to make them easier 
+        for contemporary users to search and read, in line with current Tibetan writing conventions. As part 
+        of the normalisation process, TibNorm:
 
         -        changes Tibetan numbers into Arabic numerals
         -        changes Tibetan brackets and quotation marks into the standard western equivalents
@@ -11,12 +13,15 @@
         -        reduces two or more ་  to a single one
         -        changes ཌ་ or ཊ་ to གས་ unless preceded by a white space, tab, or new line.
 
-        TibNorm also expands abbreviations so that they are shown in their full form. For abbreviations in classical Tibetan, TibNorm draws from the list of over 6,000 classical Tibetan abbreviations compiled by Bruno Lainé of the Tibetan Manuscript Project Vienna (TMPV) as part of the project’s Resources for Kanjur and Tanjur Studies. In TibNorm, the user can manually change the flag in the abbreviations table to exclude any abbreviation that they don’t want to expand.
+        TibNorm also expands abbreviations so that they are shown in their full form. For 
+        abbreviations in classical Tibetan, TibNorm draws from the list of over 6,000 classical Tibetan 
+        abbreviations compiled by Bruno Lainé of the Tibetan Manuscript Project Vienna (TMPV) as part of 
+        the project’s Resources for Kanjur and Tanjur Studies. In TibNorm, the user can manually change the 
+        flag in the abbreviations table to exclude any abbreviation that they don’t want to expand.
         
         Tibnorm was developed for the Divergent Discourses project by YUki Kyogoku of Leipzig University.
 
 <!-- TODOs -->
-
 ## How to use
 1. Change your path in _src/config.ini_
    - Set to _table_path_ the absolute path where the folder _tables_ is located.
