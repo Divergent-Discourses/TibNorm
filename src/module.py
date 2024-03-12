@@ -2,6 +2,7 @@ import glob
 import os
 import pandas as pd
 import re
+from paragraph_extractor import XMLParagraphExtractor
 
 def load_tables(config):
     tables = {}
@@ -24,13 +25,15 @@ def load_texts(config):
     texts = {}
     path = config['paths']['text_path']
     documents = os.listdir(path)
+    paragraph_extractor = XMLParagraphExtractor()
     for doc in documents:
         texts[doc] = {}
-        pattern = os.path.join(path , doc, '**', '*.txt')
+        pattern = os.path.join(path , doc, '*', 'page', '*.xml')
         files = [file for file in glob.glob(pattern, recursive=True) if os.path.isfile(file)]
         for file in files:
             file_name = os.path.basename(file).split('.')[0]
-            texts[doc][file_name] = open(file).read()
+            df = paragraph_extractor.extract_xml(file)
+            texts[doc][file_name] = '\n'.join(df['paragraph'])
     return texts
 
 def norm_abbreviation(texts, tables):

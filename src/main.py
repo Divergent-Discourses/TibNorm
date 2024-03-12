@@ -2,9 +2,6 @@ import os
 from configparser import ConfigParser
 from module import load_texts, load_tables, normalisation, export_text
 
-# TODO: paragraph identification, try out with 1761186 where tabs are missing.
-# TODO: create a new branch for space division.
-
 def main():
     config = ConfigParser()
     config.read('src/config.ini')
