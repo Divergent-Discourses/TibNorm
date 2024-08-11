@@ -21,7 +21,6 @@
         
         Tibnorm was developed for the Divergent Discourses project by Yuki Kyogoku of Leipzig University.
 
-<!-- TODOs -->
 ## How to use
 1. Change your path in _src/config.ini_
    - Set to _table_path_ the absolute path where the folder _tables_ is located.
