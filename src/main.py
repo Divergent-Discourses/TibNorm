@@ -1,9 +1,6 @@
-import os
 from configparser import ConfigParser
-from module import load_texts, load_tables, normalisation, export_text
-
-# TODO: paragraph identification, try out with 1761186 where tabs are missing.
-# TODO: create a new branch for space division.
+from module import load_texts, load_tables, export_text
+from normaliser import Normaliser
 
 def main():
     config = ConfigParser()
@@ -16,9 +13,11 @@ def main():
     texts = load_texts(config)
 
     # normalize
-    text_norm = normalisation(texts, tables)
+    normaliser = Normaliser(texts, tables)
+    text_norm = normaliser.normalisation()
 
     # export
+    print("Saving normalised files ...")
     export_text(config, text_norm)
 
 if __name__ == '__main__':
